@@ -16,7 +16,6 @@ import java.util.Map.Entry;
  * from file.
  */
 public class Dictionary {
-
 	private final static Map<Integer, Integer> replaceMap = new HashMap<Integer, Integer>();
 	static {
 		replaceMap.put(Integer.valueOf('ä'), Integer.valueOf('A'));
@@ -44,7 +43,6 @@ public class Dictionary {
 			replaceMap.put(Integer.valueOf(i - 'A' + 'a'), Integer.valueOf(i));
 		}
 	}
-
 	protected Map<Integer, Set<Word>> wordSetMap = new HashMap<Integer, Set<Word>>();
 
 	public void add(Word word) {
@@ -157,5 +155,4 @@ public class Dictionary {
 		builder.append(")");
 		return builder.toString();
 	}
-
 }

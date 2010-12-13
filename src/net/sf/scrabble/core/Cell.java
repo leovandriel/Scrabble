@@ -5,11 +5,9 @@ package net.sf.scrabble.core;
  * candidate letters and score.
  */
 class Cell {
-
 	public int[] creditCacheArray;
 	public int letter = Alphabet.EMPTY_VALUE;
 	public int bonus = 0;
-
 	// caching
 	public boolean isNoBegin;
 	public boolean isNoEnd;

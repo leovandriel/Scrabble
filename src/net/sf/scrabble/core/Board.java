@@ -15,15 +15,12 @@ import java.util.Set;
  * The scrabble board as a bidirection set of cells.
  */
 public class Board {
-
 	private static final int HOR = Combo.OrientationType.HORIZONTAL.ordinal();
 	private static final int VER = Combo.OrientationType.VERTICAL.ordinal();
 	private static final Cell BORDER_CELL = new Cell(0);
 	private static final int MAX_DICTIONARY_CACHE_IN_REPORT = 30;
-
 	private int boardWidth;
 	private int boardHeight;
-
 	private Cell[][][] cellMatrixArray;
 	private Dictionary mainDictionary;
 	private int maxNumberOfResults = 100;
@@ -31,7 +28,6 @@ public class Board {
 	private Scoring scoring;
 
 	private class BoardIterator implements Iterator<Coord>, Iterable<Coord> {
-
 		private Coord coord = new Coord(0, 0);
 		private int width;
 		private int height;
@@ -66,7 +62,6 @@ public class Board {
 		public void remove() {
 			throw new UnsupportedOperationException();
 		}
-
 	}
 
 	public Board(int width, int height, Dictionary dictionary, Alphabet alphabet, Scoring scoring) {
@@ -120,25 +115,21 @@ public class Board {
 		alphabet.checkLegalTokens(tokens);
 		report.append("----------------------------------------------------------------\n");
 		report.append("solving: " + tokens + "\n");
-
 		int[] freqArray = new int[alphabet.getSize() + 1];
 		int jokerCount = alphabet.getFrequencyAndJoker(tokens, freqArray);
 		String frequencyString = alphabet.frequencyToString(freqArray);
 		report.append("frequency: " + frequencyString + "  jokers: " + jokerCount + "  total: "
 				+ (freqArray[freqArray.length - 1] + jokerCount) + "\n");
-
 		report.append("using: " + mainDictionary + "\n");
 		Dictionary dictionary = mainDictionary.createFilteredDictionary(freqArray, jokerCount);
 		Map<String, Dictionary> dictionaryCacheMap = new HashMap<String, Dictionary>();
 		dictionaryCacheMap.put(frequencyString, dictionary);
-
 		ResultSet verticalResultSet = new ResultSet(maxNumberOfResults);
 		solveSingleOrientation(freqArray, jokerCount, dictionaryCacheMap, cellMatrixArray[VER], verticalResultSet);
 		for (Combo combo : verticalResultSet) {
 			result.add(combo.getMirror());
 		}
 		solveSingleOrientation(freqArray, jokerCount, dictionaryCacheMap, cellMatrixArray[HOR], result);
-
 		report.append("dictionary-cache size: " + dictionaryCacheMap.size() + "\n");
 		if (dictionaryCacheMap.size() < MAX_DICTIONARY_CACHE_IN_REPORT) {
 			List<String> keyList = new ArrayList<String>(dictionaryCacheMap.keySet());
@@ -155,7 +146,6 @@ public class Board {
 				report.append("  " + key + " = " + dictionaryCacheMap.get(key) + "\n");
 			}
 		}
-
 		return result;
 	}
 
@@ -212,12 +202,10 @@ public class Board {
 										empty++;
 									}
 								}
-
 								List<Cell> cellList = new LinkedList<Cell>();
 								for (int i = 0; i < word.length(); i++) {
 									cellList.add(cellMatrix[coord.x + i][coord.y]);
 								}
-
 								boolean usedAll = empty == freqArray[freqArray.length - 1] + jokerCount;
 								int credit = scoring.getScore(word, usedAll, cellList);
 								Combo combo = new Combo(word, new Coord(coord), credit);
@@ -266,7 +254,6 @@ public class Board {
 			c.isYetConnected = getCell(coord.x, coord.y - 1, cellMatrix).letter != Alphabet.EMPTY_VALUE
 					|| getCell(coord.x, coord.y + 1, cellMatrix).letter != Alphabet.EMPTY_VALUE
 					|| getCell(coord.x, coord.y, cellMatrix).letter != Alphabet.EMPTY_VALUE;
-
 			boolean isBeginOfWord = getCell(coord.x - 1, coord.y, cellMatrix).letter == Alphabet.EMPTY_VALUE
 					&& c.letter != Alphabet.EMPTY_VALUE;
 			if (isBeginOfWord && c.letter != Alphabet.JOKER_VALUE) {
@@ -373,5 +360,4 @@ public class Board {
 	public String toString() {
 		return "Board(" + boardWidth + ", " + boardHeight + ")";
 	}
-
 }

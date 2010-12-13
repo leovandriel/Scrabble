@@ -10,7 +10,6 @@ import java.util.TreeSet;
  * configuration.
  */
 class ResultSet extends AbstractSet<Combo> {
-
 	private TreeSet<Combo> set = new TreeSet<Combo>(new Comparator<Combo>() {
 		public int compare(Combo a, Combo b) {
 			int diff = b.getCredits() - a.getCredits();
@@ -20,7 +19,6 @@ class ResultSet extends AbstractSet<Combo> {
 			return diff;
 		}
 	});
-
 	private int maxSize;
 
 	public ResultSet(int maxSize) {
@@ -49,5 +47,4 @@ class ResultSet extends AbstractSet<Combo> {
 	public int size() {
 		return set.size();
 	}
-
 }

@@ -3,6 +3,7 @@ package net.sf.scrabble.gui;
 import java.awt.BorderLayout;
 import java.awt.FileDialog;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -17,7 +18,6 @@ import java.util.Set;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -34,22 +34,18 @@ import net.sf.scrabble.core.Coord;
 import net.sf.scrabble.local.DutchFactory;
 import net.sf.scrabble.local.ScrabbleFactory;
 
-public class ScrabbleComponent extends JFrame {
-
+public class ScrabbleComponent extends JPanel {
 	private static final long serialVersionUID = 1L;
-
 	private BoardComponent boardComponent;
 	private JTextArea infoArea;
 	private JList comboList;
 	private JTextField tokenField;
 	private JLabel statusLabel;
-
 	private ScrabbleFactory scrabbleFactory = new DutchFactory();
 	private Alphabet alphabet;
 	private Board board;
 
 	public class ComboEntry {
-
 		private Combo combo;
 
 		public ComboEntry(Combo combo) {
@@ -70,7 +66,6 @@ public class ScrabbleComponent extends JFrame {
 
 	public ScrabbleComponent() {
 		initComponents();
-		initWindow();
 		statusLabel.setText("Startup complete");
 	}
 
@@ -80,17 +75,10 @@ public class ScrabbleComponent extends JFrame {
 		infoArea.setText(builder.toString());
 	}
 
-	private void initWindow() {
-		setTitle("Scrabble");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(800, 600);
-	}
-
 	private void initComponents() {
 		board = scrabbleFactory.createBoard();
 		alphabet = board.getAlphabet();
-
-		boardComponent = new BoardComponent(alphabet, board);
+		boardComponent = new BoardComponent(board);
 		// try {
 		// boardComponent.loadDictionary();
 		// } catch (IOException e1) {
@@ -101,12 +89,11 @@ public class ScrabbleComponent extends JFrame {
 				updateInfo(coord);
 			}
 		});
-
 		JButton saveButton = new JButton("Save");
 		saveButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					FileDialog dialog = new FileDialog(ScrabbleComponent.this, "Select Scrabble file", FileDialog.SAVE);
+					FileDialog dialog = new FileDialog((Frame) null, "Select Scrabble file", FileDialog.SAVE);
 					dialog.setVisible(true);
 					if (dialog.getFile() != null) {
 						String path = dialog.getDirectory() + dialog.getFile();
@@ -121,12 +108,11 @@ public class ScrabbleComponent extends JFrame {
 				}
 			}
 		});
-
 		JButton loadButton = new JButton("Load");
 		loadButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					FileDialog dialog = new FileDialog(ScrabbleComponent.this, "Select Scrabble file", FileDialog.LOAD);
+					FileDialog dialog = new FileDialog((Frame) null, "Select Scrabble file", FileDialog.LOAD);
 					dialog.setVisible(true);
 					if (dialog.getFile() != null) {
 						String path = dialog.getDirectory() + dialog.getFile();
@@ -154,12 +140,10 @@ public class ScrabbleComponent extends JFrame {
 				}
 			}
 		});
-
 		JPanel northPanel = new JPanel();
 		northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.X_AXIS));
 		northPanel.add(loadButton);
 		northPanel.add(saveButton);
-
 		JButton refreshButton = new JButton("Refresh");
 		refreshButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -179,13 +163,10 @@ public class ScrabbleComponent extends JFrame {
 				}
 			}
 		});
-
 		tokenField = new JTextField();
-
 		JPanel applyPanel = new JPanel(new BorderLayout());
 		applyPanel.add(refreshButton, BorderLayout.NORTH);
 		applyPanel.add(tokenField, BorderLayout.SOUTH);
-
 		comboList = new JList(new DefaultListModel());
 		comboList.setFont(new Font("monospaced", Font.PLAIN, 11));
 		comboList.addListSelectionListener(new ListSelectionListener() {
@@ -196,26 +177,18 @@ public class ScrabbleComponent extends JFrame {
 				}
 			}
 		});
-
 		JPanel westPanel = new JPanel(new BorderLayout());
 		westPanel.add(applyPanel, BorderLayout.NORTH);
 		westPanel.add(new JScrollPane(comboList), BorderLayout.CENTER);
-
 		infoArea = new JTextArea();
 		statusLabel = new JLabel("Starting up..");
 		JPanel southPanel = new JPanel(new BorderLayout());
 		southPanel.add(infoArea, BorderLayout.CENTER);
 		southPanel.add(statusLabel, BorderLayout.SOUTH);
-
-		getContentPane().setLayout(new BorderLayout());
-		getContentPane().add(northPanel, BorderLayout.NORTH);
-		getContentPane().add(boardComponent, BorderLayout.CENTER);
-		getContentPane().add(westPanel, BorderLayout.EAST);
-		getContentPane().add(southPanel, BorderLayout.SOUTH);
-	}
-
-	public static void main(String[] args) {
-		ScrabbleComponent frame = new ScrabbleComponent();
-		frame.setVisible(true);
+		setLayout(new BorderLayout());
+		add(northPanel, BorderLayout.NORTH);
+		add(boardComponent, BorderLayout.CENTER);
+		add(westPanel, BorderLayout.EAST);
+		add(southPanel, BorderLayout.SOUTH);
 	}
 }

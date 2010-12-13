@@ -12,12 +12,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
 import net.sf.scrabble.core.Alphabet;
 import net.sf.scrabble.core.Board;
 import net.sf.scrabble.core.Combo;
@@ -26,9 +24,7 @@ import net.sf.scrabble.core.Scoring;
 import net.sf.scrabble.core.Combo.Assigment;
 
 public class BoardComponent extends JPanel {
-
 	private static final long serialVersionUID = 1L;
-
 	private final static int BOARD_WIDTH = 15;
 	private final static int BOARD_HEIGHT = 15;
 	private final static Color TRIPPLE_LETTER = Color.getHSBColor(.55f, .80f, .80f);
@@ -36,17 +32,17 @@ public class BoardComponent extends JPanel {
 	private final static Color DEFAULT = Color.getHSBColor(.50f, .60f, .80f);
 	private final static Color DOUBLE_WORD = Color.getHSBColor(.05f, .60f, .90f);
 	private final static Color TRIPPLE_WORD = Color.getHSBColor(1.f, .60f, .90f);
-
 	private Board board;
 	private Alphabet alphabet;
 	private JTextField[][] fieldMatrix = new JTextField[BOARD_WIDTH][BOARD_HEIGHT];
 	private Map<JTextField, Coord> fieldMap = new HashMap<JTextField, Coord>();
 	private List<BoardListener> listenerList = new LinkedList<BoardListener>();
-	private Scoring scoring = new Scoring();
+	private Scoring scoring;
 
-	public BoardComponent(Alphabet alphabet, Board board) {
+	public BoardComponent(Board board) {
 		this.board = board;
-		this.alphabet = alphabet;
+		this.alphabet = board.getAlphabet();
+		this.scoring = board.getScoring();
 		initComponents();
 	}
 
@@ -154,6 +150,9 @@ public class BoardComponent extends JPanel {
 				JTextField field = new JTextField();
 				field.setHorizontalAlignment(JTextField.CENTER);
 				int bonus = scoring.getBonusFor(new Coord(x, y));
+				if(bonus != 0){
+					System.out.println(x+" "+y);
+				}
 				Color color;
 				switch (bonus) {
 				case -3:
@@ -224,8 +223,6 @@ public class BoardComponent extends JPanel {
 				fieldMap.put(field, new Coord(x, y));
 			}
 		}
-
 		setField(BOARD_WIDTH / 2, BOARD_HEIGHT / 2, "_");
-
 	}
 }
