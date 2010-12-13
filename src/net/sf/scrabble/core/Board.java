@@ -167,7 +167,7 @@ public class Board {
 				int[] frequencySumArray = null;
 				for (int l = 0; l < start.maxWordLength; l++) {
 					Cell c = cellMatrix[coord.x + l][coord.y];
-					if (c.letter != Alphabet.EMPTY_VALUE) {
+					if (c.letter != Alphabet.EMPTY_VALUE && c.letter != Alphabet.JOKER_VALUE) {
 						if (frequencySumArray == null) {
 							frequencySumArray = Arrays.copyOf(freqArray, freqArray.length);
 						}
