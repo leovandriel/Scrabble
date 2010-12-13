@@ -49,12 +49,10 @@ public class Scoring {
 	}
 
 	public int getBonusFor(Coord coord) {
-		System.out.println(bonusMap.size());
 		Integer boxed = bonusMap.get(coord);
 		if (boxed == null) {
 			return DEFAULT_BONUS;
 		}
-			System.out.println(coord);
 		return boxed.intValue();
 	}
 

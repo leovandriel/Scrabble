@@ -150,9 +150,6 @@ public class BoardComponent extends JPanel {
 				JTextField field = new JTextField();
 				field.setHorizontalAlignment(JTextField.CENTER);
 				int bonus = scoring.getBonusFor(new Coord(x, y));
-				if(bonus != 0){
-					System.out.println(x+" "+y);
-				}
 				Color color;
 				switch (bonus) {
 				case -3:
