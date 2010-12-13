@@ -9,10 +9,8 @@ import java.util.Map;
  * The allowed characters in the alphabet.
  */
 public class Alphabet {
-
 	public static final int EMPTY_VALUE = -1;
 	public static final int JOKER_VALUE = -2;
-
 	private List<Integer> codeList = new LinkedList<Integer>();
 	private Map<Integer, Integer> codeMap = new HashMap<Integer, Integer>();
 	private int jokerCode;
@@ -111,5 +109,4 @@ public class Alphabet {
 		}
 		return builder.toString();
 	}
-
 }

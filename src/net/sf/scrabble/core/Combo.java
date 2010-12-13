@@ -9,7 +9,6 @@ import java.util.List;
  * onto, this credits are also present.
  */
 public class Combo {
-
 	public enum OrientationType {
 		HORIZONTAL, VERTICAL
 	}

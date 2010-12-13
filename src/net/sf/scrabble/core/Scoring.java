@@ -5,14 +5,12 @@ import java.util.List;
 import java.util.Map;
 
 public class Scoring {
-
 	public static int DEFAULT_CREDIT = 1;
 	public static int DEFAULT_BONUS = 0;
-
 	private Map<Integer, Integer> creditMap = new HashMap<Integer, Integer>();
 	private Map<Coord, Integer> bonusMap = new HashMap<Coord, Integer>();
 	private int bonusForUsingAll;
-
+	
 	public void addCredit(int value, int credit) {
 		creditMap.put(Integer.valueOf(value), Integer.valueOf(credit));
 	}
@@ -51,10 +49,12 @@ public class Scoring {
 	}
 
 	public int getBonusFor(Coord coord) {
+		System.out.println(bonusMap.size());
 		Integer boxed = bonusMap.get(coord);
 		if (boxed == null) {
 			return DEFAULT_BONUS;
 		}
+			System.out.println(coord);
 		return boxed.intValue();
 	}
 
@@ -69,10 +69,8 @@ public class Scoring {
 	public int getBonusForUsingAll() {
 		return bonusForUsingAll;
 	}
-	
-	public void setBonusForUsingAll(int bonusForUsingAll){
+
+	public void setBonusForUsingAll(int bonusForUsingAll) {
 		this.bonusForUsingAll = bonusForUsingAll;
 	}
-
-
 }

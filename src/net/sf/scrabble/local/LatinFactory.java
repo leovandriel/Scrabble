@@ -3,7 +3,6 @@ package net.sf.scrabble.local;
 import net.sf.scrabble.core.Alphabet;
 
 public abstract class LatinFactory implements ScrabbleFactory {
-
 	public static final int DEFAULT_EMPTY_CODE = ' ';
 	public static final int DEFAULT_JOKER_CODE = '_';
 
