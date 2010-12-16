@@ -71,7 +71,7 @@ public class BoardComponent extends JPanel {
 	}
 
 	private int getField(int x, int y) {
-		return filterString(fieldMatrix[x][y].getText()).codePointAt(0);
+		return filterString(fieldMatrix[x][y].getText().toUpperCase()).codePointAt(0);
 	}
 
 	private String filterString(String s) {
