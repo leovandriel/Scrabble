@@ -31,7 +31,7 @@ import net.sf.scrabble.core.Alphabet;
 import net.sf.scrabble.core.Board;
 import net.sf.scrabble.core.Combo;
 import net.sf.scrabble.core.Coord;
-import net.sf.scrabble.local.EnglishFactory;
+import net.sf.scrabble.local.MaximaFactory;
 import net.sf.scrabble.local.ScrabbleFactory;
 
 public class ScrabbleComponent extends JPanel {
@@ -41,7 +41,7 @@ public class ScrabbleComponent extends JPanel {
 	private JList comboList;
 	private JTextField tokenField;
 	private JLabel statusLabel;
-	private ScrabbleFactory scrabbleFactory = new EnglishFactory();
+	private ScrabbleFactory scrabbleFactory = new MaximaFactory();
 	private Alphabet alphabet;
 	private Board board;
 
