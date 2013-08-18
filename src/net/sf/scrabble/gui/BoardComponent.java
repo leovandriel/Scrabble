@@ -109,7 +109,7 @@ public class BoardComponent extends JPanel {
 		StringBuilder builder = new StringBuilder();
 		for (int y = 0; y < BOARD_HEIGHT; y++) {
 			for (int x = 0; x < BOARD_WIDTH; x++) {
-				builder.append(getField(x, y));
+				builder.append((char) getField(x, y));
 			}
 			builder.append("\n");
 		}
