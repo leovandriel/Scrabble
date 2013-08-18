@@ -27,8 +27,9 @@ public class Scoring {
 		int i = 0;
 		for (Cell d : cellList) {
 			if (d.letter == Alphabet.EMPTY_VALUE && d.bonus < 0) {
-				credit += (-d.bonus - 1) * getCreditFor(word.valueArray[i++]);
+				credit += (-d.bonus - 1) * getCreditFor(word.valueArray[i]);
 			}
+            i++;
 		}
 		for (Cell d : cellList) {
 			if (d.letter == Alphabet.EMPTY_VALUE && d.bonus > 0) {
