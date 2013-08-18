@@ -18,7 +18,6 @@ import java.util.Map.Entry;
 public class Dictionary {
 	private final static Map<Integer, Integer> replaceMap = new HashMap<Integer, Integer>();
 	static {
-		replaceMap.put(Integer.valueOf('ä'), Integer.valueOf('A'));
 		replaceMap.put(Integer.valueOf('à'), Integer.valueOf('A'));
 		replaceMap.put(Integer.valueOf('â'), Integer.valueOf('A'));
 		replaceMap.put(Integer.valueOf('ë'), Integer.valueOf('E'));
@@ -27,10 +26,8 @@ public class Dictionary {
 		replaceMap.put(Integer.valueOf('ê'), Integer.valueOf('E'));
 		replaceMap.put(Integer.valueOf('ï'), Integer.valueOf('I'));
 		replaceMap.put(Integer.valueOf('î'), Integer.valueOf('I'));
-		replaceMap.put(Integer.valueOf('ö'), Integer.valueOf('O'));
 		replaceMap.put(Integer.valueOf('ó'), Integer.valueOf('O'));
 		replaceMap.put(Integer.valueOf('ô'), Integer.valueOf('O'));
-		replaceMap.put(Integer.valueOf('ü'), Integer.valueOf('U'));
 		replaceMap.put(Integer.valueOf('û'), Integer.valueOf('U'));
 		replaceMap.put(Integer.valueOf('ç'), Integer.valueOf('C'));
 		replaceMap.put(Integer.valueOf('ñ'), Integer.valueOf('N'));
