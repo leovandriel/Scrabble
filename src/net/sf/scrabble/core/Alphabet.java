@@ -83,7 +83,7 @@ public class Alphabet {
 
 	public void checkLegalTokens(String tokens) {
 		for (int i = 0; i < tokens.length(); i++) {
-			getValueForCode(tokens.codePointAt(i));
+			getValueForToken(tokens.codePointAt(i));
 		}
 	}
 
@@ -91,7 +91,7 @@ public class Alphabet {
 		int jokers = 0;
 		for (int i = 0; i < tokens.length(); i++) {
 			int code = tokens.codePointAt(i);
-			if (code == emptyCode) {
+			if (code == jokerCode) {
 				jokers++;
 			} else {
 				freqArray[getValueForCode(code)]++;
